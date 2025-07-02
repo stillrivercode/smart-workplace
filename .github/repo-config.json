@@ -1,0 +1,13 @@
+{
+  "name": "smart-workplace",
+  "description": "AI-powered workflow automation project",
+  "owner": "stillrivercode",
+  "features": [
+    "ai-tasks",
+    "ai-pr-review",
+    "cost-monitoring",
+    "security"
+  ],
+  "template": "default",
+  "created": "2025-07-02T23:36:27.946Z"
+}
