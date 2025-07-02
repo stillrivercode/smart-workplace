@@ -1,271 +1,146 @@
-# AI Workflow Template
+# Smart Workplace Dashboard Workshop
 
-A CLI tool to create AI-powered GitHub workflow automation projects. Get AI-assisted development up and running in your
-GitHub repository in minutes.
+A streamlined workshop teaching Document Driven Development (DDD) through building a Smart Workplace Dashboard. Participants create three focused widgets that help HR teams and office managers monitor workplace conditions and optimize employee experience using API Ninjas and mock data.
 
-## 🚀 Quick Start
+## Workshop Overview
 
-### Install via npm
+### Learning Objectives
+By the end of this 2-hour workshop, participants will:
+- Write effective DDD specifications for dashboard components
+- Generate React components using AI agents
+- Integrate multiple API Ninjas endpoints
+- Handle asynchronous data and error states
+- Measure productivity improvements with AI-driven development
 
-```bash
-# Install globally
-npm install -g @stillrivercode/smart-workplace
+### What We'll Build
+A focused dashboard with three core widgets:
+- **Office Weather Monitor** - Current conditions and commute impact
+- **Meeting Time Finder** - Cross-timezone meeting scheduler
+- **Office Pulse** - Simple wellness and utilization metrics
 
-# Create a new project
-smart-workplace my-ai-project
-cd my-ai-project
+### Technical Requirements
+- Node.js and npm installed
+- API Ninjas free account
+- Code editor (VS Code)
+- Chrome browser
+- Access to Claude
 
-# Run the local install script
-./install.sh
-```
+## 🚀 Workshop Setup
 
-### Or use npx (no installation required)
-
-```bash
-# Create project directly
-npx @stillrivercode/smart-workplace my-ai-project
-cd my-ai-project
-
-# Run the local install script
-./install.sh
-```
-
-## 🎯 What You Get
-
-✅ **GitHub Actions workflows** for AI task automation
-✅ **Issue templates** for requesting AI assistance
-✅ **Pre-configured labels** and automation
-✅ **Cost monitoring** and usage optimization
-✅ **Security scanning** and quality gates
-✅ **Complete documentation** for your team
-
-## 🛠️ Setup Process
-
-After running the init command, you'll have a complete project with:
-
-1. **AI-powered GitHub workflows** that respond to labeled issues
-2. **Issue templates** for different types of AI tasks
-3. **Automated quality checks** (linting, security, tests)
-4. **Cost controls** and monitoring
-5. **Documentation** tailored to your project
-
-### Manual Configuration Required
-
-The template creates all necessary files but **does not automatically configure secrets**. You'll need to set up:
-
-#### 1. Environment Variables (Optional for Local Development)
-
-Copy the provided template and configure your local environment:
+### Prerequisites Setup
 
 ```bash
-# Copy template to create your local environment file
+# Clone the workshop repository
+git clone https://github.com/stillrivercode/smart-workplace.git
+cd smart-workplace
+
+# Install dependencies
+npm install
+
+# Copy environment template
 cp .env.example .env
-
-# Edit .env with your actual values
-# OPENROUTER_API_KEY=sk-or-your-actual-key-here
 ```
 
-#### 2. GitHub Repository Secrets (Required for CI/CD)
+### API Ninjas Setup
 
-Add these secrets to your GitHub repository settings (`Settings` → `Secrets and variables` → `Actions`):
+1. Create a free account at [API Ninjas](https://api.api-ninjas.com/)
+2. Get your API key from the dashboard
+3. Add it to your `.env` file:
+   ```bash
+   API_NINJAS_KEY=your-api-key-here
+   ```
+
+## 🎯 Workshop Structure
+
+### Module 1: Document Driven Development Fundamentals
+- Creating effective specifications
+- Component requirement documentation
+- API integration planning
+
+### Module 2: Building the Weather Widget
+- Weather API integration
+- Real-time data handling
+- Error state management
+
+### Module 3: Meeting Time Finder
+- Timezone handling
+- Multi-API coordination
+- User interaction patterns
+
+### Module 4: Office Pulse Dashboard
+- Mock data integration
+- Dashboard composition
+- Performance optimization
+
+## 📋 Workshop Flow
+
+1. **Specification Writing**: Create detailed component specifications
+2. **AI Implementation**: Use Claude to generate React components
+3. **API Integration**: Connect to API Ninjas endpoints
+4. **Testing & Refinement**: Validate functionality and user experience
+5. **Performance Review**: Measure AI-assisted development efficiency
+
+## 🛠️ Development Tools
+
+### Available Scripts
 
 ```bash
-# Required: OpenRouter API key for AI functionality
-gh secret set OPENROUTER_API_KEY --body "sk-or-your-actual-key-here"
+# Start development server
+npm run dev
 
-# Optional: GitHub Personal Access Token (only for cross-workflow triggering)
-gh secret set GH_PAT --body "your-github-token-here"
+# Run tests
+npm test
+
+# Build for production
+npm run build
+
+# Lint code
+npm run lint
+
+# Format code
+npm run format
 ```
 
-**Get your OpenRouter API key**: [openrouter.ai](https://openrouter.ai)
+### Code Quality
 
-#### 3. Repository Labels
+The project includes pre-configured linting and formatting tools:
+- **ESLint** for JavaScript/React code quality
+- **Prettier** for consistent code formatting
+- **Pre-commit hooks** for automated quality checks
 
-Set up the required labels for AI workflow automation:
+## 📚 Resources
 
-```bash
-# Run the label setup script (included in your project)
-./scripts/setup-labels.sh
-```
+### API Documentation
+- [API Ninjas Weather](https://api.api-ninjas.com/v1/weather)
+- [API Ninjas World Time](https://api.api-ninjas.com/v1/worldtime)
+- [React Documentation](https://react.dev/)
 
-### GitHub Token Permissions
+### Workshop Materials
+- **Detailed module guides** in `/workshop/` directory:
+  - [Phase 1: Setup & Weather Widget](workshop/01-setup-and-weather-widget.md)
+  - [Phase 2: Meeting Time Finder](workshop/02-meeting-time-finder.md)
+  - [Phase 3: Office Pulse Dashboard](workshop/03-office-pulse-dashboard.md)
+  - [Phase 4: Wrap-up & Resources](workshop/04-wrap-up-and-resources.md)
+- **Setup guides**:
+  - [Mock Data Setup](workshop/mock-data-setup.md)
+  - [Facilitation Guide](workshop/facilitation-guide.md)
 
-This project's scripts and workflows use the `GITHUB_TOKEN` to interact with the GitHub API. The token's permissions are
-automatically configured in GitHub Actions environments. For local development, you may need to create a personal access
-token with the appropriate scopes.
-
-For more information on GitHub token permissions, see the official documentation:
-
-- [Automatic token authentication](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)
-- [Troubleshooting your authentication credentials](https://docs.github.com/en/authentication/troubleshooting-your-authentication-credentials)
-- [Authenticating as a GitHub App installation](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/authenticating-as-a-github-app-installation)
-
-## 📋 How It Works
-
-1. **Create Issue**: Add `ai-task` label to any GitHub issue
-2. **AI Processing**: GitHub Action automatically implements the solution
-3. **Pull Request**: AI creates PR with code, tests, and documentation
-4. **Review & Merge**: Your team reviews and merges AI-generated code
-
-### Example Workflow
-
-```bash
-# 1. Create an issue requesting a feature
-gh issue create --title "Add user authentication" --label "ai-task"
-
-# 2. AI automatically:
-#    - Creates feature branch
-#    - Implements the code
-#    - Adds tests
-#    - Creates pull request
-
-# 3. Review and merge the PR
-gh pr review --approve
-gh pr merge
-```
-
-## 🏷️ Available Labels
-
-The setup creates these labels for different AI workflows:
-
-- `ai-task` - General AI development tasks
-- `ai-bug-fix` - AI-assisted bug fixes
-- `ai-refactor` - Code refactoring requests
-- `ai-test` - Test generation
-- `ai-docs` - Documentation updates
-- `ai-fix-lint` - Automatic lint fixes
-- `ai-fix-security` - Security issue fixes
-- `ai-fix-tests` - Test failure fixes
-
-## 📚 Documentation
-
-After setup, your project includes:
-
-- **Getting Started Guide** - Team onboarding
-- **AI Workflow Guide** - How to use AI assistance
-- **Security Guidelines** - Safe AI development practices
-- **Troubleshooting** - Common issues and solutions
-
-## 🔒 Security Features
-
-- **Automated security scanning** with Bandit and Semgrep
-- **Dependency vulnerability checks**
-- **Secret detection** and prevention
-- **AI-powered security fixes** for detected issues
-- **Cost controls** to prevent runaway API usage
-
-## 🧹 Code Quality & Security
-
-This project uses a suite of npm-based tools to ensure code quality, consistency,
-and security. The tools are configured to run in pre-commit hooks and in CI/CD workflows.
-
-### Linting & Formatting
-
-- **ESLint**: For identifying and reporting on patterns in JavaScript.
-  - `.eslintrc.js`: Base configuration.
-  - `.eslintrc.security.js`: Stricter rules for security.
-- **Prettier**: For consistent code formatting.
-- **markdownlint**: For ensuring Markdown files are well-formed.
-- **yamllint**: For validating YAML files.
-
-### Available npm scripts
-
-- `npm run lint`: Lints the codebase.
-- `npm run lint:fix`: Fixes linting errors automatically.
-- `npm run lint:cached`: Lints only changed files.
-- `npm run lint:security`: Runs a security-focused lint scan.
-- `npm run lint:all`: Runs all linting and formatting checks in parallel.
-- `npm run format`: Formats the codebase with Prettier.
-- `npm run format:check`: Checks for formatting issues.
-
-### Pre-commit Hooks
-
-The `./install.sh` script automatically sets up pre-commit hooks to run these checks
-before each commit. See `.pre-commit-config.yaml` for the full configuration.
-
-## ⚡ CLI Commands
-
-```bash
-# Create new project
-smart-workplace <project-name>
-
-# Get help
-smart-workplace --help
-
-# Check version
-smart-workplace --version
-```
-
-### CLI Options
-
-```bash
-# Basic setup
-smart-workplace my-project
-
-# Force overwrite existing directory
-smart-workplace my-project --force
-
-# Use specific template
-smart-workplace my-project --template enterprise
-
-# Initialize git repository
-smart-workplace my-project --git-init
-```
-
-### Install Script Options
-
-```bash
-# Non-interactive installation
-./install.sh --auto-yes
-
-# Development installation
-./install.sh --dev
-
-# Skip specific components
-./install.sh --skip-labels --skip-claude
-```
-
-## 🆘 Support & Troubleshooting
+## 🆘 Support
 
 ### Common Issues
 
-| Issue                    | Solution                                             |
-| ------------------------ | ---------------------------------------------------- |
-| API key not working      | Verify key at [openrouter.ai](https://openrouter.ai) |
-| Workflows not triggering | Check repository secrets are set                     |
-| AI tasks failing         | Review workflow logs in GitHub Actions               |
-| Permission errors        | Check GitHub Actions permissions                     |
+| Issue | Solution |
+|-------|----------|
+| API key not working | Verify key at [API Ninjas](https://api.api-ninjas.com/) |
+| CORS errors | Use development proxy in package.json |
+| Component not rendering | Check browser console for errors |
 
 ### Getting Help
 
-- **GitHub Issues**: [Report bugs or request features](https://github.com/stillrivercode/smart-workplace/issues)
-- **Documentation**: Check the generated docs in your project
-- **Examples**: See working examples in the template repository
-
-## 🔄 Updates
-
-Keep your AI workflows up to date:
-
-```bash
-# Check for updates
-npm update @stillrivercode/smart-workplace
-
-# Update your project workflows (manual sync with template)
-git fetch template
-git log --oneline template/main ^HEAD
-```
+- Raise your hand during the workshop
+- Check the troubleshooting guide in `/docs/`
+- Ask questions in the workshop chat
 
 ## 📄 License
 
-MIT License - free for personal and commercial use.
-
-> **Note**: This project is currently in active development and not yet ready for external contributions.
-> We appreciate your interest and will update this section when we're ready to accept contributions.
-
----
-
-**Ready to supercharge your development with AI?**
-
-```bash
-npx @stillrivercode/smart-workplace my-ai-project
-```
+MIT License - free for educational and commercial use.
