@@ -6,7 +6,7 @@ const missing = [];
 for (const dep of dependencies) {
   try {
     execSync(`command -v ${dep}`, { stdio: 'ignore' });
-  } catch (err) {
+  } catch {
     missing.push(dep);
   }
 }

@@ -131,7 +131,7 @@ async function validateSystem() {
         `npm 8.0.0 or higher is required. Current version: ${npmVersion}`
       );
     }
-  } catch (error) {
+  } catch {
     throw new Error('npm is not installed or not accessible');
   }
 
@@ -139,7 +139,7 @@ async function validateSystem() {
   try {
     const { execSync } = require('child_process');
     execSync('git --version', { encoding: 'utf8' });
-  } catch (error) {
+  } catch {
     console.warn(
       '⚠️  Git is not installed. Some features may not work properly.'
     );
@@ -160,7 +160,7 @@ async function validateSystem() {
       req.on('timeout', () => reject(new Error('Network timeout')));
       req.end();
     });
-  } catch (error) {
+  } catch {
     console.warn(
       '⚠️  Network connectivity check failed. GitHub API may not be accessible.'
     );
@@ -208,11 +208,10 @@ function validateGitHubOrg(org) {
 async function validateWritePermissions(dirPath) {
   try {
     const testFile = path.join(sanitizePath(dirPath), '.write-test');
-    // eslint-disable-next-line security/detect-non-literal-fs-filename
     await fs.writeFile(testFile, 'test');
     await fs.remove(testFile);
     return true;
-  } catch (error) {
+  } catch {
     throw new Error(`No write permission for directory: ${dirPath}`);
   }
 }

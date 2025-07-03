@@ -32,7 +32,6 @@ function findPackageRoot(startDir) {
   let currentDir = startDir;
   while (currentDir !== path.dirname(currentDir)) {
     const packageJsonPath = path.join(currentDir, 'package.json');
-    // eslint-disable-next-line security/detect-non-literal-fs-filename
     if (fs.existsSync(packageJsonPath)) {
       try {
         const pkg = fs.readJsonSync(packageJsonPath);
@@ -42,7 +41,6 @@ function findPackageRoot(startDir) {
           const essentialFiles = ['cli/', 'scripts/', 'package.json'];
           const missingFiles = essentialFiles.filter(
             (file) =>
-              // eslint-disable-next-line security/detect-non-literal-fs-filename
               !fs.existsSync(path.join(currentDir, file))
           );
 
@@ -51,7 +49,7 @@ function findPackageRoot(startDir) {
           }
           // Continue searching if essential files are missing
         }
-      } catch (e) {
+      } catch {
         // Continue searching if can't read package.json
       }
     }
@@ -69,14 +67,13 @@ function findPackageRoot(startDir) {
     const essentialFiles = ['cli/', 'scripts/', 'package.json'];
     const missingFiles = essentialFiles.filter(
       (file) =>
-        // eslint-disable-next-line security/detect-non-literal-fs-filename
         !fs.existsSync(path.join(packageDir, file))
     );
 
     if (missingFiles.length === 0) {
       return packageDir;
     }
-  } catch (e) {
+  } catch {
     // Fall through to final fallback
   }
 
@@ -241,19 +238,17 @@ async function updateReadme(config) {
   if (!(await fs.pathExists(readmePath))) {
     console.log(
       chalk.yellow(
-        `⚠️  README.md template not found. Creating default README.md...`
+        '⚠️  README.md template not found. Creating default README.md...'
       )
     );
 
     // Create a basic README.md as fallback
     const defaultReadme = generateDefaultReadme(config);
-    // eslint-disable-next-line security/detect-non-literal-fs-filename
     await fs.writeFile(readmePath, defaultReadme);
-    console.log(chalk.green(`  ✅ Created default README.md`));
+    console.log(chalk.green('  ✅ Created default README.md'));
     return;
   }
 
-  // eslint-disable-next-line security/detect-non-literal-fs-filename
   let readme = await fs.readFile(readmePath, 'utf8');
 
   // Replace template placeholders
@@ -264,9 +259,8 @@ async function updateReadme(config) {
     .replace(/{{PROJECT_DESCRIPTION}}/g, config.description)
     .replace(/{{PROJECT_NAME}}/g, config.repositoryName);
 
-  // eslint-disable-next-line security/detect-non-literal-fs-filename
   await fs.writeFile(readmePath, readme);
-  console.log(chalk.green(`  ✅ Updated README.md with project details`));
+  console.log(chalk.green('  ✅ Updated README.md with project details'));
 }
 
 function generateDefaultReadme(config) {

@@ -25,7 +25,7 @@ export default [
     },
     rules: {
       // Possible errors
-      'no-console': 'warn',
+      'no-console': 'off', // Allow console in CLI tools
       'no-debugger': 'error',
       'no-duplicate-imports': 'error',
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
