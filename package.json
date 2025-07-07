@@ -73,7 +73,7 @@
     "yaml-lint": "^1.7.0"
   },
   "scripts": {
-    "test": "jest --passWithNoTests",
+    "test": "cd app && npm test",
     "lint": "eslint cli/ shared-commands/",
     "lint:fix": "eslint cli/ shared-commands/ --fix",
     "lint:cached": "eslint --cache cli/ shared-commands/",
