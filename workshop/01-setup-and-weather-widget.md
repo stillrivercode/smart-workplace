@@ -43,27 +43,31 @@ GET https://api.api-ninjas.com/v1/weather?city={city}
 
 ## Implementation Code
 
-### API Service Setup
+### Secure API Service Setup
 ```javascript
 // services/apiNinjas.js
 import axios from 'axios';
 
-const API_KEY = process.env.REACT_APP_API_NINJAS_KEY;
-const BASE_URL = 'https://api.api-ninjas.com/v1';
+// 🔒 SECURE: Uses backend proxy instead of exposing API key in client
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3001';
 
 const client = axios.create({
-  baseURL: BASE_URL,
+  baseURL: API_BASE_URL,
+  timeout: 10000,
   headers: {
-    'X-Api-Key': API_KEY
+    'Content-Type': 'application/json'
   }
 });
 
 export const apiNinjas = {
-  getWeather: (city) => client.get(`/weather?city=${city}`),
-  getTimezone: (city) => client.get(`/timezone?city=${city}`),
-  getAirQuality: (city) => client.get(`/airquality?city=${city}`)
+  // These call secure backend endpoints that proxy to API Ninjas
+  getWeather: (city) => client.get(`/api/weather?city=${encodeURIComponent(city)}`),
+  getTimezone: (city) => client.get(`/api/timezone?city=${encodeURIComponent(city)}`),
+  getAirQuality: (city) => client.get(`/api/airquality?city=${encodeURIComponent(city)}`)
 };
 ```
+
+**🔒 Security Note**: The API key is now securely stored on the backend server, not exposed in the client-side code. This prevents unauthorized access and protects your API quotas.
 
 ### Weather Monitor Component
 ```javascript

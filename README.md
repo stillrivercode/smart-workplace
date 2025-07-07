@@ -40,16 +40,22 @@ cd smart-workplace
 # Copy environment templates
 cp .env.example .env
 cp app/.env.example app/.env
+cp api/.env.example api/.env
 ```
 
-### API Ninjas Setup
+### API Ninjas Setup (Secure)
 
 1. Create a free account at [API Ninjas](https://api.api-ninjas.com/)
 2. Get your API key from the dashboard
-3. Add it to your React app's `.env` file:
+3. Add it to your **backend server's** `.env` file (keeps it secure):
    ```bash
-   # In app/.env
-   REACT_APP_API_NINJAS_KEY=your-api-key-here
+   # In api/.env (SECURE - server-side only)
+   API_NINJAS_KEY=your-api-key-here
+   ```
+4. The React app connects to the secure backend proxy (no API key exposure):
+   ```bash
+   # In app/.env (PUBLIC - safe to expose)
+   REACT_APP_API_BASE_URL=http://localhost:3001
    ```
 
 ## 🎯 Workshop Structure
@@ -87,14 +93,17 @@ cp app/.env.example app/.env
 ### Available Scripts
 
 ```bash
-# Start development server
-npm run dev
+# Start backend API server (in one terminal)
+cd api && npm install && npm run dev
+
+# Start React development server (in another terminal)
+cd app && npm run dev
 
 # Run tests
-npm test
+cd app && npm test
 
 # Build for production
-npm run build
+cd app && npm run build
 
 # Lint code
 npm run lint
