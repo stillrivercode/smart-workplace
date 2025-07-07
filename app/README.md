@@ -16,22 +16,25 @@ A modern React application built with TypeScript and Vite that displays a "Smart
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 
 ### Installation
 
 1. Navigate to the app directory:
+
    ```bash
    cd app
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
 
 3. Start the development server:
+
    ```bash
    npm run dev
    ```
@@ -80,19 +83,23 @@ app/
 ## Components
 
 ### App Component
+
 The main application container that renders the Greeting component with a modern glass-morphism design.
 
 ### Greeting Component
+
 A reusable component that displays a customizable greeting message. Defaults to "Smart Workplace" but accepts a custom message via props.
 
 ## Testing
 
 The app includes comprehensive tests:
+
 - **Unit Tests**: Individual component testing
 - **Integration Tests**: Component interaction testing
 - **Accessibility Tests**: ARIA compliance testing
 
 Run tests with:
+
 ```bash
 npm run test:run
 ```
@@ -100,6 +107,7 @@ npm run test:run
 ## Styling
 
 The app features modern CSS with:
+
 - Gradient backgrounds
 - Glass-morphism effects
 - Responsive design
@@ -117,6 +125,7 @@ The app features modern CSS with:
 ## Future Enhancements
 
 This foundation can be extended with:
+
 - Smart workplace features (calendar integration, team collaboration, etc.)
 - Additional UI components
 - State management (Redux/Zustand)

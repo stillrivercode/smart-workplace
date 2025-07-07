@@ -65,9 +65,9 @@ Implement a minimal React application using Create React App (CRA) or Vite that 
 
 ```mermaid
 graph TD
-    A[Browser] --> B[React App]
-    B --> C[Hello World Component]
-    C --> D[Rendered Output]
+    A[Browser] --> B[Smart Workplace React App]
+    B --> C[Greeting Component]
+    C --> D[Smart Workplace Display]
 ```
 
 ### Component Overview
@@ -159,14 +159,14 @@ function Greeting({ message = "Smart Workplace" }: GreetingProps): JSX.Element {
 
 ### Phase 2: Component Development
 - [ ] Create App component
-- [ ] Create HelloWorld component
+- [ ] Create Greeting component
 - [ ] Implement basic styling
 - [ ] Add TypeScript interfaces
 
 ### Phase 3: Testing & Quality
 - [ ] Write unit tests for components
 - [ ] Configure test runner
-- [ ] Set up pre-commit hooks
+- [ ] Set up pre-commit hooks with React app testing
 - [ ] Verify accessibility compliance
 
 ### Phase 4: Documentation & Deployment
@@ -179,7 +179,7 @@ function Greeting({ message = "Smart Workplace" }: GreetingProps): JSX.Element {
 
 ### Unit Testing
 
-- **Framework**: Jest + React Testing Library
+- **Framework**: Vitest + React Testing Library
 - **Coverage Target**: 100% for this simple app
 - **Test Categories**: 
   - Component rendering
@@ -202,11 +202,46 @@ function Greeting({ message = "Smart Workplace" }: GreetingProps): JSX.Element {
 - **Full App Rendering**: Test complete app renders correctly
 - **Component Integration**: Verify App and Greeting work together
 
+## Code Quality & Pre-commit Hooks
+
+### Pre-commit Configuration
+
+The project includes comprehensive pre-commit hooks that ensure code quality for both the main project and the React application:
+
+#### React App Quality Checks
+
+- **react-app-tests**: Automatically runs `npm test -- --run` when React files change
+- **react-app-lint**: Runs ESLint validation on React TypeScript/JavaScript files
+- **react-app-format-check**: Validates Prettier formatting for all React app files
+- **react-app-build**: Verifies production build works (manual stage for performance)
+- **react-app-npm-lock-check**: Ensures package-lock.json consistency in app directory
+
+#### Hook Triggers
+
+- Tests run on any file changes in `app/` directory
+- Linting runs on `.js`, `.ts`, `.jsx`, `.tsx` files in `app/`
+- Format checking runs on all files in `app/` directory
+- NPM lock validation runs when `app/package.json` changes
+
+#### Integration Benefits
+
+- **Automated Quality**: Prevents broken code from being committed
+- **Consistent Formatting**: Ensures all React code follows project standards
+- **Test Coverage**: Guarantees all tests pass before commits
+- **Build Verification**: Optional manual verification that production builds work
+- **Dependency Management**: Prevents inconsistent package-lock.json files
+
+#### Setup Requirements
+
+- Node.js 18+ (for React app testing)
+- Pre-commit 2.15.0+ (for hook execution)
+- Python 3.8+ (for pre-commit framework)
+
 ## Deployment Plan
 
 ### Development Environment
 
-- **Setup**: `npm start` for local development
+- **Setup**: `npm run dev` for local development
 - **Hot Reload**: Automatic refresh on code changes
 - **Dev Tools**: React Developer Tools integration
 
@@ -231,9 +266,10 @@ function Greeting({ message = "Smart Workplace" }: GreetingProps): JSX.Element {
 - [x] **Setup React Project**: Initialize new React app with TypeScript
 - [x] **Create Components**: Implement App and Greeting components
 - [x] **Add Styling**: Basic CSS styling for the components
-- [x] **Setup Testing**: Configure Jest and React Testing Library
+- [x] **Setup Testing**: Configure Vitest and React Testing Library
 - [x] **Write Tests**: Unit tests for all components
 - [x] **Configure Linting**: ESLint and Prettier configuration
+- [x] **Setup Pre-commit Hooks**: Configure automated React app testing and quality checks
 - [x] **Documentation**: Update README with setup instructions
 - [x] **Build Verification**: Ensure production build works correctly
 
@@ -246,6 +282,7 @@ function Greeting({ message = "Smart Workplace" }: GreetingProps): JSX.Element {
 - **Testing**: 8 comprehensive tests covering component rendering, props, and accessibility
 - **Build**: Production build tested and working correctly
 - **Linting**: ESLint and Prettier configured with proper formatting rules
+- **Pre-commit Integration**: Automated React app testing, linting, and formatting validation
 - **Documentation**: Complete README with setup instructions and project overview
 
 **Key Features Implemented**:
