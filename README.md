@@ -47,7 +47,7 @@ cp .env.example .env
 2. Get your API key from the dashboard
 3. Add it to your `.env` file:
    ```bash
-   API_NINJAS_KEY=your-api-key-here
+   REACT_APP_API_NINJAS_KEY=your-api-key-here
    ```
 
 ## 🎯 Workshop Structure
