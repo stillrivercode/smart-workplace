@@ -66,6 +66,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install app dependencies
+        run: cd app && npm ci
+
       - name: Run Node.js tests
         run: npm test
 
