@@ -1,22 +1,24 @@
-import js from '@eslint/js';
+const js = require('@eslint/js');
+const prettier = require('eslint-config-prettier');
+const security = require('eslint-plugin-security');
 
-export default [
-  js.configs.recommended,
+module.exports = [
+  // Base configuration for all files
   {
     files: ['**/*.js', '**/*.mjs', '**/*.cjs'],
     languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'commonjs',
+      ecmaVersion: 2022,
+      sourceType: 'module',
       globals: {
+        // Node.js globals
+        global: 'readonly',
         process: 'readonly',
         Buffer: 'readonly',
         __dirname: 'readonly',
         __filename: 'readonly',
+        // Console
         console: 'readonly',
-        module: 'readonly',
-        require: 'readonly',
-        exports: 'readonly',
-        global: 'readonly',
+        // Browser globals (for CLI tools that might run in browser-like environments)
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
         setInterval: 'readonly',
@@ -24,50 +26,138 @@ export default [
       },
     },
     rules: {
-      // Possible errors
-      'no-console': 'off', // Allow console in CLI tools
-      'no-debugger': 'error',
-      'no-duplicate-imports': 'error',
-      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-      
-      // Best practices
-      'curly': ['error', 'all'],
-      'eqeqeq': ['error', 'always'],
-      'no-eval': 'error',
-      'no-implied-eval': 'error',
-      'no-new-func': 'error',
-      'no-var': 'error',
-      'prefer-const': 'error',
-      
-      // Style
-      'indent': ['error', 2],
-      'quotes': ['error', 'single'],
-      'semi': ['error', 'always'],
+      ...js.configs.recommended.rules,
+      'no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+      'no-console': 'off',
     },
   },
+
+  // CommonJS files
   {
-    // Test file overrides
+    files: ['**/*.cjs', '.eslintrc*.js'],
+    languageOptions: {
+      sourceType: 'commonjs',
+      globals: {
+        require: 'readonly',
+        module: 'readonly',
+        exports: 'readonly',
+      },
+    },
+  },
+
+  // Security rules for all files
+  {
+    files: ['**/*.js', '**/*.mjs', '**/*.cjs'],
+    plugins: {
+      security,
+    },
+    rules: {
+      ...security.configs.recommended.rules,
+    },
+  },
+
+  // Test files - Jest environment and relaxed security rules
+  {
     files: [
       '**/*.test.js',
-      '**/*.spec.js', 
+      '**/*.spec.js',
       '**/tests/**/*.js',
       '**/test/**/*.js',
       '**/__tests__/**/*.js',
     ],
+    languageOptions: {
+      globals: {
+        // Jest globals
+        describe: 'readonly',
+        test: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        beforeAll: 'readonly',
+        beforeEach: 'readonly',
+        afterAll: 'readonly',
+        afterEach: 'readonly',
+        jest: 'readonly',
+        // Node.js globals for tests
+        process: 'readonly',
+        require: 'readonly',
+        module: 'readonly',
+        exports: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+      },
+    },
     rules: {
-      'no-console': 'off',
+      'security/detect-child-process': 'off',
+      'security/detect-non-literal-fs-filename': 'off',
+      'security/detect-non-literal-require': 'off',
+      'security/detect-unsafe-regex': 'off',
     },
   },
+
+
+  // Scripts files
+  {
+    files: ['scripts/**/*.js'],
+    languageOptions: {
+      globals: {
+        process: 'readonly',
+        require: 'readonly',
+        module: 'readonly',
+        exports: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+      },
+    },
+  },
+
+  // Shared commands files
+  {
+    files: ['shared-commands/**/*.js'],
+    languageOptions: {
+      globals: {
+        process: 'readonly',
+        require: 'readonly',
+        module: 'readonly',
+        exports: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+      },
+    },
+    rules: {
+      'no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+    },
+  },
+
+  // Prettier integration (should be last)
+  prettier,
+
+  // Global ignores
   {
     ignores: [
       'node_modules/',
       'dist/',
       'build/',
       'coverage/',
+      '.git/',
       '*.min.js',
-      'bin/',
-      '.eslintrc*.js',
-      '*.config.js',
+      'package-lock.json',
+      'scripts/', // Contains shell scripts, not JavaScript
+      '.temp/',
+      'temp/',
+      '**/fixtures/',
+      'jest.config.js',
     ],
   },
 ];

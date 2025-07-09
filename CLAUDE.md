@@ -457,6 +457,31 @@ functionality across different AI assistants (Claude, Gemini, etc.).
 
 ### Available Shared Commands
 
+#### roadmap [OPTIONS]
+
+Displays the latest project roadmap or generates a new one from a template.
+
+Usage:
+
+```bash
+# Display the latest roadmap
+./shared-commands/commands/roadmap.sh
+
+# Generate a new roadmap with custom title
+./shared-commands/commands/roadmap.sh --title "Q4 2024 Development Roadmap"
+
+# Generate a new roadmap from input
+./shared-commands/commands/roadmap.sh --generate --input "Feature A, Bug Fix B, Refactor C"
+```
+
+This command:
+
+1. Finds and displays the most recent roadmap document
+2. Generates new roadmaps from templates with title-based naming
+3. Supports custom titles and automated filename generation
+4. Includes collision avoidance for duplicate names
+5. Creates comprehensive roadmap structure from templates
+
 #### create-user-story --title "TITLE" [OPTIONS]
 
 Creates a GitHub issue and comprehensive user story document in a unified workflow.
