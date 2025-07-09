@@ -33,8 +33,8 @@ A focused dashboard with three core widgets:
 git clone https://github.com/stillrivercode/smart-workplace.git
 cd smart-workplace
 
-# Install dependencies
-npm install
+# Run the installation script
+./install.sh
 ```
 
 ### Step 2: Start Development
