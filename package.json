@@ -24,11 +24,7 @@
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
   },
-  "bin": {
-    "agentic-workflow-template": "./cli/index.js"
-  },
   "files": [
-    "cli/",
     "scripts/",
     ".github/workflows/",
     "docs/",
@@ -73,11 +69,13 @@
     "yaml-lint": "^1.7.0"
   },
   "scripts": {
+    "start": "cd app && npm run dev",
     "test": "cd app && npm test",
-    "lint": "eslint cli/ shared-commands/",
-    "lint:fix": "eslint cli/ shared-commands/ --fix",
-    "lint:cached": "eslint --cache cli/ shared-commands/",
-    "lint:security": "eslint cli/ shared-commands/",
+    "test:config": "node -e \"console.log('Running config validation tests...'); try { require('./eslint.config.js'); console.log('✅ ESLint config valid'); } catch(e) { console.error('❌ ESLint config error:', e.message); process.exit(1); }\"",
+    "lint": "eslint shared-commands/",
+    "lint:fix": "eslint shared-commands/ --fix",
+    "lint:cached": "eslint --cache shared-commands/",
+    "lint:security": "eslint shared-commands/",
     "lint:yaml": "npx yaml-lint .github/workflows/*.yml .github/workflows/*.yaml *.yml *.yaml",
     "lint:markdown": "npx markdownlint *.md docs/*.md",
     "lint:all": "npm-run-all --parallel lint:cached lint:yaml lint:markdown format:check",

@@ -4,10 +4,10 @@
 - Set up the development environment
 - Learn DDD specification writing
 - Create the Office Weather Monitor widget
-- Integrate with API Ninjas Weather API
+- Integrate with Stillriver Weather API
 
 ## Timeline
-- 5 min: Project setup and API key configuration
+- 5 min: Project setup and API configuration
 - 5 min: Review weather widget specification
 - 10 min: Generate component with AI
 - 10 min: Integrate API and test
@@ -26,7 +26,7 @@ Help employees and office managers quickly see weather conditions at each office
 
 ### API Endpoint
 ```
-GET https://api.api-ninjas.com/v1/weather?city={city}
+GET https://api.stillriver.info/v1/weather?city={city}
 ```
 
 ### Visual Design
@@ -45,20 +45,16 @@ GET https://api.api-ninjas.com/v1/weather?city={city}
 
 ### API Service Setup
 ```javascript
-// services/apiNinjas.js
+// services/stillriverApi.js
 import axios from 'axios';
 
-const API_KEY = process.env.REACT_APP_API_NINJAS_KEY;
-const BASE_URL = 'https://api.api-ninjas.com/v1';
+const BASE_URL = 'https://api.stillriver.info/v1';
 
 const client = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    'X-Api-Key': API_KEY
-  }
+  baseURL: BASE_URL
 });
 
-export const apiNinjas = {
+export const stillriverApi = {
   getWeather: (city) => client.get(`/weather?city=${city}`),
   getTimezone: (city) => client.get(`/timezone?city=${city}`),
   getAirQuality: (city) => client.get(`/airquality?city=${city}`)
@@ -69,7 +65,7 @@ export const apiNinjas = {
 ```javascript
 // components/WeatherMonitor.jsx
 import React, { useState, useEffect } from 'react';
-import { apiNinjas } from '../services/apiNinjas';
+import { stillriverApi } from '../services/stillriverApi';
 import { offices } from '../data/offices';
 
 export const WeatherMonitor = () => {
@@ -81,7 +77,7 @@ export const WeatherMonitor = () => {
       setLoading(true);
       try {
         const promises = offices.map(office => 
-          apiNinjas.getWeather(office.city)
+          stillriverApi.getWeather(office.city)
             .then(res => ({ [office.id]: res.data }))
         );
         
@@ -143,5 +139,5 @@ export const WeatherMonitor = () => {
 | Issue | Solution |
 |-------|----------|
 | API rate limiting | Use provided mock responses |
-| CORS errors | Check API key configuration |
+| CORS errors | Check network connectivity to Stillriver API |
 | State updates not showing | Review useEffect dependencies |

@@ -24,6 +24,7 @@ if (!command || !allowedCommands.includes(command)) {
 
 const scriptPath = path.join(__dirname, 'commands', `${command}.sh`);
 
+// eslint-disable-next-line security/detect-non-literal-fs-filename
 if (!fs.existsSync(scriptPath)) {
   console.error(`Command script not found: ${scriptPath}`);
   process.exit(1);

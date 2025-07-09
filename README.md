@@ -1,6 +1,6 @@
 # Smart Workplace Dashboard Workshop
 
-A streamlined workshop teaching Document Driven Development (DDD) through building a Smart Workplace Dashboard. Participants create three focused widgets that help HR teams and office managers monitor workplace conditions and optimize employee experience using API Ninjas and mock data.
+A streamlined workshop teaching Document Driven Development (DDD) through building a Smart Workplace Dashboard. Participants create three focused widgets that help HR teams and office managers monitor workplace conditions and optimize employee experience using api.stillriver.info and mock data.
 
 ## Workshop Overview
 
@@ -8,7 +8,7 @@ A streamlined workshop teaching Document Driven Development (DDD) through buildi
 By the end of this 2-hour workshop, participants will:
 - Write effective DDD specifications for dashboard components
 - Generate React components using AI agents
-- Integrate multiple API Ninjas endpoints
+- Integrate multiple API endpoints via api.stillriver.info
 - Handle asynchronous data and error states
 - Measure productivity improvements with AI-driven development
 
@@ -20,15 +20,14 @@ A focused dashboard with three core widgets:
 
 ### Technical Requirements
 - Node.js and npm installed
-- API Ninjas free account
+- Internet access (uses Stillriver API proxy)
 - Code editor (VS Code)
 - Chrome browser
 - Access to Claude
 
-## 🚀 Workshop Setup
+## 🚀 Quick Start for Workshop Participants
 
-### Prerequisites Setup
-
+### Step 1: Get the Code
 ```bash
 # Clone the workshop repository
 git clone https://github.com/stillrivercode/smart-workplace.git
@@ -36,21 +35,20 @@ cd smart-workplace
 
 # Run the installation script
 ./install.sh
-
-# Copy environment templates
-cp .env.example .env
-cp app/.env.example app/.env
 ```
 
-### API Ninjas Setup
+### Step 2: Start Development
+```bash
+# Start the development server
+cd app
+npm install
+npm start
+```
 
-1. Create a free account at [API Ninjas](https://api.api-ninjas.com/)
-2. Get your API key from the dashboard
-3. Add it to your React app's `.env` file:
-   ```bash
-   # In app/.env
-   REACT_APP_API_NINJAS_KEY=your-api-key-here
-   ```
+Your workshop environment is now ready! The app will open at `http://localhost:3000`.
+
+### API Setup - Already Done! ✅
+This workshop uses **Stillriver API** (api.stillriver.info) as a proxy for API Ninjas endpoints. **No API keys or registration required** - everything works out of the box for workshop participants.
 
 ## 🎯 Workshop Structure
 
@@ -78,7 +76,7 @@ cp app/.env.example app/.env
 
 1. **Specification Writing**: Create detailed component specifications
 2. **AI Implementation**: Use Claude to generate React components
-3. **API Integration**: Connect to API Ninjas endpoints
+3. **API Integration**: Connect to Stillriver API proxy endpoints
 4. **Testing & Refinement**: Validate functionality and user experience
 5. **Performance Review**: Measure AI-assisted development efficiency
 
@@ -112,9 +110,9 @@ The project includes pre-configured linting and formatting tools:
 
 ## 📚 Resources
 
-### API Documentation
-- [API Ninjas Weather](https://api.api-ninjas.com/v1/weather)
-- [API Ninjas World Time](https://api.api-ninjas.com/v1/worldtime)
+### API Information
+- **Stillriver API**: api.stillriver.info - Workshop proxy for API Ninjas endpoints (no auth required)
+- **Available Endpoints**: `/v1/weather`, `/v1/timezone`, `/v1/airquality`
 - [React Documentation](https://react.dev/)
 
 ### Workshop Materials
@@ -133,7 +131,7 @@ The project includes pre-configured linting and formatting tools:
 
 | Issue | Solution |
 |-------|----------|
-| API key not working | Verify key at [API Ninjas](https://api.api-ninjas.com/) |
+| API connection issues | Verify internet connection to api.stillriver.info |
 | CORS errors | Use development proxy in package.json |
 | Component not rendering | Check browser console for errors |
 

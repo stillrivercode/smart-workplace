@@ -1,0 +1,12 @@
+# Bandit Configuration File
+# This configuration helps reduce false positives in security scanning
+
+[bandit]
+# Exclude test directories and virtual environments from security scanning
+# Test code often uses patterns that would be unsafe in production
+# Virtual environments contain third-party code we don't control
+exclude: /tests/,/test/,*test*.py,/venv/,/env/,/.venv/,/.env/
+
+# Skip specific tests that generate too many false positives
+# B101: Use of assert detected - Assert statements are acceptable in test code
+skips: B101
