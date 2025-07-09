@@ -68,6 +68,7 @@
     "yaml-lint": "^1.7.0"
   },
   "scripts": {
+    "start": "cd app && npm run dev",
     "test": "cd app && npm test",
     "test:config": "node -e \"console.log('Running config validation tests...'); try { require('./eslint.config.js'); console.log('✅ ESLint config valid'); } catch(e) { console.error('❌ ESLint config error:', e.message); process.exit(1); }\"",
     "lint": "eslint shared-commands/",
