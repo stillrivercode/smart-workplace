@@ -69,6 +69,7 @@
   },
   "scripts": {
     "test": "cd app && npm test",
+    "test:config": "node -e \"console.log('Running config validation tests...'); try { require('./eslint.config.js'); console.log('✅ ESLint config valid'); } catch(e) { console.error('❌ ESLint config error:', e.message); process.exit(1); }\"",
     "lint": "eslint shared-commands/",
     "lint:fix": "eslint shared-commands/ --fix",
     "lint:cached": "eslint --cache shared-commands/",
