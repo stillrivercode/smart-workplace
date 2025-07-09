@@ -37,17 +37,19 @@ cd smart-workplace
 # Run the installation script
 ./install.sh
 
-# Copy environment template
+# Copy environment templates
 cp .env.example .env
+cp app/.env.example app/.env
 ```
 
 ### API Ninjas Setup
 
 1. Create a free account at [API Ninjas](https://api.api-ninjas.com/)
 2. Get your API key from the dashboard
-3. Add it to your `.env` file:
+3. Add it to your React app's `.env` file:
    ```bash
-   API_NINJAS_KEY=your-api-key-here
+   # In app/.env
+   REACT_APP_API_NINJAS_KEY=your-api-key-here
    ```
 
 ## 🎯 Workshop Structure
