@@ -100,20 +100,6 @@ module.exports = [
     },
   },
 
-  // CLI files - Node.js specific globals
-  {
-    files: ['cli/**/*.js'],
-    languageOptions: {
-      globals: {
-        process: 'readonly',
-        require: 'readonly',
-        module: 'readonly',
-        exports: 'readonly',
-        __dirname: 'readonly',
-        __filename: 'readonly',
-      },
-    },
-  },
 
   // Scripts files
   {

@@ -1,0 +1,21 @@
+
+> @stillrivercode/agentic-workflow-template@1.11.3 lint:security
+> eslint cli/ shared-commands/
+
+
+/home/runner/work/smart-workplace/smart-workplace/cli/create-project.js
+   35:9   warning  Found existsSync from package "fs-extra" with non literal argument at index 0  security/detect-non-literal-fs-filename
+   44:16  warning  Found existsSync from package "fs-extra" with non literal argument at index 0  security/detect-non-literal-fs-filename
+   70:10  warning  Found existsSync from package "fs-extra" with non literal argument at index 0  security/detect-non-literal-fs-filename
+  247:11  warning  Found writeFile from package "fs-extra" with non literal argument at index 0   security/detect-non-literal-fs-filename
+  252:22  warning  Found readFile from package "fs-extra" with non literal argument at index 0    security/detect-non-literal-fs-filename
+  262:9   warning  Found writeFile from package "fs-extra" with non literal argument at index 0   security/detect-non-literal-fs-filename
+
+/home/runner/work/smart-workplace/smart-workplace/cli/validators.js
+  211:11  warning  Found writeFile from package "fs-extra" with non literal argument at index 0  security/detect-non-literal-fs-filename
+
+/home/runner/work/smart-workplace/smart-workplace/shared-commands/index.js
+  27:6  warning  Found existsSync from package "fs" with non literal argument at index 0  security/detect-non-literal-fs-filename
+
+✖ 8 problems (0 errors, 8 warnings)
+
