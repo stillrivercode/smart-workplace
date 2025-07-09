@@ -10,7 +10,7 @@ src/
 │   ├── offices.js
 │   └── team.js
 └── services/
-    └── apiNinjas.js
+    └── stillriverApi.js
 ```
 
 ## Office Locations Data
@@ -174,19 +174,15 @@ export const team = [
 
 ## API Service Configuration
 
-### File: `src/services/apiNinjas.js`
+### File: `src/services/stillriverApi.js`
 ```javascript
 import axios from 'axios';
 
-const API_KEY = process.env.REACT_APP_API_NINJAS_KEY;
-const BASE_URL = 'https://api.api-ninjas.com/v1';
+const BASE_URL = 'https://api.stillriver.info/v1';
 
 // Create axios instance with common configuration
 const client = axios.create({
   baseURL: BASE_URL,
-  headers: {
-    'X-Api-Key': API_KEY
-  },
   timeout: 10000 // 10 second timeout
 });
 
@@ -214,7 +210,7 @@ client.interceptors.response.use(
   }
 );
 
-export const apiNinjas = {
+export const stillriverApi = {
   // Weather endpoint
   getWeather: (city) => {
     return client.get(`/weather?city=${encodeURIComponent(city)}`);
@@ -301,7 +297,7 @@ export const mockData = {
 // Utility function to use mock data when API fails
 export const getWeatherWithFallback = async (city) => {
   try {
-    const response = await apiNinjas.getWeather(city);
+    const response = await stillriverApi.getWeather(city);
     return response.data;
   } catch (error) {
     console.warn(`Weather API failed for ${city}, using mock data`);
@@ -311,7 +307,7 @@ export const getWeatherWithFallback = async (city) => {
 
 export const getTimezoneWithFallback = async (city) => {
   try {
-    const response = await apiNinjas.getTimezone(city);
+    const response = await stillriverApi.getTimezone(city);
     return response.data;
   } catch (error) {
     console.warn(`Timezone API failed for ${city}, using mock data`);
@@ -321,7 +317,7 @@ export const getTimezoneWithFallback = async (city) => {
 
 export const getAirQualityWithFallback = async (city) => {
   try {
-    const response = await apiNinjas.getAirQuality(city);
+    const response = await stillriverApi.getAirQuality(city);
     return response.data;
   } catch (error) {
     console.warn(`Air Quality API failed for ${city}, using mock data`);
@@ -334,9 +330,8 @@ export const getAirQualityWithFallback = async (city) => {
 
 ### File: `.env.example`
 ```bash
-# API Ninjas API Key
-# Get your key from: https://api.api-ninjas.com/
-REACT_APP_API_NINJAS_KEY=your-api-key-here
+# Stillriver API Configuration
+REACT_APP_STILLRIVER_API_URL=https://api.stillriver.info/v1
 
 # Development settings
 REACT_APP_ENV=development
@@ -348,8 +343,8 @@ REACT_APP_USE_MOCK_DATA=false
 
 ### File: `.env`
 ```bash
-# Copy from .env.example and add your actual API key
-REACT_APP_API_NINJAS_KEY=your-actual-api-key-here
+# Copy from .env.example - no API key needed for workshop
+REACT_APP_STILLRIVER_API_URL=https://api.stillriver.info/v1
 REACT_APP_ENV=development
 REACT_APP_API_TIMEOUT=10000
 REACT_APP_USE_MOCK_DATA=false
@@ -368,8 +363,7 @@ mkdir -p src/data src/services
 # Create environment file
 cp .env.example .env
 
-# Edit .env file with your API key
-# REACT_APP_API_NINJAS_KEY=your-key-here
+# .env file is ready to use - no API key needed
 ```
 
 ### Verify Setup
@@ -378,7 +372,7 @@ cp .env.example .env
 npm start
 
 # Check browser console for API logs
-# Should see successful API requests to API Ninjas
+# Should see successful API requests to Stillriver API
 ```
 
 ## Usage in Components
@@ -388,7 +382,7 @@ npm start
 import React, { useState, useEffect } from 'react';
 import { offices } from '../data/offices';
 import { team } from '../data/team';
-import { apiNinjas, getWeatherWithFallback } from '../services/apiNinjas';
+import { stillriverApi, getWeatherWithFallback } from '../services/stillriverApi';
 
 const ExampleComponent = () => {
   const [data, setData] = useState(null);
@@ -420,10 +414,10 @@ const ExampleComponent = () => {
 ## Troubleshooting
 
 ### Common Issues
-1. **API Key not working**: Verify the key is correct in `.env` file
-2. **CORS errors**: API Ninjas should not have CORS issues, check your key
-3. **Rate limiting**: API Ninjas has generous free tier limits
-4. **Network timeouts**: Increase timeout in apiNinjas.js if needed
+1. **API Connection Issues**: Verify internet connectivity to Stillriver API
+2. **CORS errors**: Stillriver API should not have CORS issues for workshop use
+3. **Rate limiting**: Workshop usage should stay within reasonable limits
+4. **Network timeouts**: Increase timeout in stillriverApi.js if needed
 
 ### Debug Mode
 Set `REACT_APP_USE_MOCK_DATA=true` in `.env` to use only mock data during development.
