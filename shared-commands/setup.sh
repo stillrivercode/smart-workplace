@@ -173,19 +173,19 @@ show_usage_examples() {
 📋 **Usage Examples**
 
 Direct execution:
-  ./shared-commands/commands/create-user-story-issue.sh --title "User Authentication"
   ./shared-commands/commands/create-spec-issue.sh --title "API Authentication" --user-story-issue 25
   ./shared-commands/commands/analyze-issue.sh --issue 25
+  ./shared-commands/commands/roadmap.sh
 
 EOF
 
     # Show symlink examples if bin directory exists
-    if [[ -d "$PROJECT_ROOT/bin" ]] && [[ -L "$PROJECT_ROOT/bin/create-user-story" ]]; then
+    if [[ -d "$PROJECT_ROOT/bin" ]] && [[ -L "$PROJECT_ROOT/bin/create-spec-issue" ]]; then
         cat << EOF
 Via symbolic links (if created):
-  ./bin/create-user-story --title "User Authentication"
-  ./bin/create-spec --title "API Authentication" --user-story-issue 25
+  ./bin/create-spec-issue --title "API Authentication" --user-story-issue 25
   ./bin/analyze-issue --issue 25
+  ./bin/roadmap
 
 EOF
     fi
@@ -193,12 +193,9 @@ EOF
     cat << EOF
 📚 **Available Commands**
 
-- **create-user-story**: Create comprehensive user story documentation
-- **create-spec**: Create detailed technical specifications
+- **create-spec-issue**: Create detailed technical specifications
 - **analyze-issue**: Analyze issues for requirements and complexity
-- **create-epic**: Create epic documentation
-- **generate-spec**: Generate specs from existing issues
-- **generate-user-story**: Generate user stories from existing issues
+- **roadmap**: Display or generate project roadmaps
 
 📖 **Documentation**
 

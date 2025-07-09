@@ -5,12 +5,9 @@ const path = require('path');
 const fs = require('fs');
 
 const allowedCommands = [
-  'add-spec-comment',
-  'add-user-story-comment',
   'analyze-issue',
-  'create-epic',
   'create-spec-issue',
-  'create-user-story-issue',
+  'roadmap',
 ];
 
 const command = process.argv[2];
