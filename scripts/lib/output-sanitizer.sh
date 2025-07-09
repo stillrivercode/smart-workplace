@@ -33,7 +33,7 @@ sanitize_output() {
     s/(token|password|secret|key)[[:space:]]*[:=][[:space:]]*[^[:space:]]+/\1=***REDACTED***/gi;
     s/(Bearer[[:space:]]+)[A-Za-z0-9._-]+/\1***REDACTED***/g;
     s/(Authorization:[[:space:]]*Bearer[[:space:]]+)[A-Za-z0-9._-]+/\1***REDACTED***/g;
-    s/eyJ[A-Za-z0-9+\/]+=*\.[A-Za-z0-9+\/]+=*\.[A-Za-z0-9+\/\-_]+=*/***JWT_TOKEN_REDACTED***/g;
+    s/eyJ[A-Za-z0-9+\/]+=*\.[A-Za-z0-9+\/]+=*\.[A-Za-z0-9+\/_-]+=*/***JWT_TOKEN_REDACTED***/g;
     s/\b(docker[[:space:]]*login[[:space:]]*.*-p[[:space:]]*)[^[:space:]]+/\1***REDACTED***/g;
     # Base64 encoded potential secrets (only very long ones to avoid false positives)
     s/[A-Za-z0-9+\/]{64,}={0,2}\??/***BASE64_REDACTED***/g;
@@ -65,7 +65,7 @@ sanitize_stdin() {
     s/(token|password|secret|key)[[:space:]]*[:=][[:space:]]*[^[:space:]]+/\1=***REDACTED***/gi;
     s/(Bearer[[:space:]]+)[A-Za-z0-9._-]+/\1***REDACTED***/g;
     s/(Authorization:[[:space:]]*Bearer[[:space:]]+)[A-Za-z0-9._-]+/\1***REDACTED***/g;
-    s/eyJ[A-Za-z0-9+\/]+=*\.[A-Za-z0-9+\/]+=*\.[A-Za-z0-9+\/\-_]+=*/***JWT_TOKEN_REDACTED***/g;
+    s/eyJ[A-Za-z0-9+\/]+=*\.[A-Za-z0-9+\/]+=*\.[A-Za-z0-9+\/_-]+=*/***JWT_TOKEN_REDACTED***/g;
     s/\b(docker[[:space:]]*login[[:space:]]*.*-p[[:space:]]*)[^[:space:]]+/\1***REDACTED***/g;
     # Base64 encoded potential secrets (only very long ones to avoid false positives)
     s/[A-Za-z0-9+\/]{64,}={0,2}\??/***BASE64_REDACTED***/g;
