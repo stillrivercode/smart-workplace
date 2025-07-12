@@ -42,6 +42,7 @@ jobs:
 
       - name: Calculate next version
         id: next_version
+        if: env.SKIP_PUBLISH != 'true'
         run: |
           CURRENT_VERSION=$(node -p "require('./package.json').version")
           echo "current=$CURRENT_VERSION" >> $GITHUB_OUTPUT
@@ -56,6 +57,10 @@ jobs:
               ;;
             patch)
               NEXT_VERSION=$(npm version patch --no-git-tag-version)
+              ;;
+            none)
+              echo "No version bump needed, skipping"
+              NEXT_VERSION=$CURRENT_VERSION
               ;;
             *)
               echo "Unknown bump type: ${{ env.BUMP_TYPE }}"
