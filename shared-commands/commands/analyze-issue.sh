@@ -2,6 +2,7 @@
 
 # Analyze GitHub issue for requirements and scope
 # Usage: ./shared-commands/commands/analyze-issue.sh --issue NUMBER
+# Provides comprehensive analysis of GitHub issues including complexity assessment
 
 set -e
 
