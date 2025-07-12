@@ -203,7 +203,7 @@ assess_complexity() {
     local content="$1"
     local labels="$2"
 
-    echo "⚡ **Complexity Assessment**:"
+    echo "🎯 **Complexity Assessment**:"
 
     local complexity_score=0
     local complexity_factors=()
