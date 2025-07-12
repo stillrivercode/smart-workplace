@@ -1,7 +1,7 @@
 {
   "name": "@stillrivercode/shared-commands",
-  "version": "1.0.0",
-  "description": "Shared commands for agentic workflow automation",
+  "version": "1.0.2",
+  "description": "Shared commands for AI-powered development workflows - includes issue analysis, spec creation, and roadmap management.",
   "main": "index.js",
   "bin": {
     "shared-commands": "index.js"

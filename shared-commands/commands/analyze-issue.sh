@@ -2,6 +2,7 @@
 
 # Analyze GitHub issue for requirements and scope
 # Usage: ./shared-commands/commands/analyze-issue.sh --issue NUMBER
+# Provides comprehensive analysis of GitHub issues including complexity assessment
 
 set -e
 
@@ -203,7 +204,7 @@ assess_complexity() {
     local content="$1"
     local labels="$2"
 
-    echo "⚡ **Complexity Assessment**:"
+    echo "🎯 **Complexity Assessment**:"
 
     local complexity_score=0
     local complexity_factors=()
