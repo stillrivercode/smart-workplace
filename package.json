@@ -1,54 +1,31 @@
 {
-  "name": "@stillrivercode/agentic-workflow-template",
-  "version": "1.11.3",
-  "description": "NPM package to create AI-powered GitHub workflow automation projects",
+  "name": "smart-workplace",
+  "version": "1.0.0",
+  "description": "Smart workplace application with AI-powered development workflows",
   "keywords": [
-    "github-actions",
+    "workplace",
+    "smart-workplace",
     "ai",
     "automation",
-    "workflow",
-    "template",
-    "cli"
+    "productivity",
+    "workflow"
   ],
-  "author": "Still River Code <noreply@stillrivercode.com>",
+  "author": "Stillriver Code <admin@stillrivercode.info>",
   "license": "MIT",
-  "homepage": "https://github.com/stillrivercode/agentic-workflow-template#readme",
+  "homepage": "https://github.com/stillrivercode/smart-workplace#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stillrivercode/agentic-workflow-template.git"
+    "url": "git+https://github.com/stillrivercode/smart-workplace.git"
   },
   "bugs": {
-    "url": "https://github.com/stillrivercode/agentic-workflow-template/issues"
+    "url": "https://github.com/stillrivercode/smart-workplace/issues"
   },
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
   },
-  "files": [
-    "scripts/",
-    ".github/workflows/",
-    "docs/",
-    "README.md",
-    "CLAUDE.md",
-    "GEMINI.md",
-    "LICENSE",
-    "install.sh",
-    "shared-commands/commands/",
-    "shared-commands/lib/",
-    "shared-commands/setup.sh",
-    "shared-commands/index.js",
-    "shared-commands/postinstall.js",
-    "shared-commands/README.md",
-    "package.json",
-    ".pre-commit-config.yaml",
-    "eslint.config.js",
-    ".yamllint.yaml",
-    ".secrets.baseline",
-    ".gitignore",
-    ".gitattributes",
-    ".env.example"
-  ],
   "dependencies": {
+    "@stillrivercode/information-dense-keywords": "^1.0.0",
     "chalk": "^4.1.2",
     "commander": "^11.0.0",
     "fs-extra": "^11.1.0",
@@ -71,21 +48,20 @@
     "start": "cd app && npm run dev",
     "test": "cd app && npm test",
     "test:config": "node -e \"console.log('Running config validation tests...'); try { require('./eslint.config.js'); console.log('✅ ESLint config valid'); } catch(e) { console.error('❌ ESLint config error:', e.message); process.exit(1); }\"",
-    "lint": "eslint shared-commands/",
-    "lint:fix": "eslint shared-commands/ --fix",
-    "lint:cached": "eslint --cache shared-commands/",
-    "lint:security": "eslint shared-commands/",
+    "lint": "eslint *.js",
+    "lint:fix": "eslint *.js --fix",
+    "lint:cached": "eslint --cache *.js",
+    "lint:security": "eslint *.js",
     "lint:yaml": "npx yaml-lint .github/workflows/*.yml .github/workflows/*.yaml *.yml *.yaml",
     "lint:markdown": "npx markdownlint *.md docs/*.md",
     "lint:all": "npm-run-all --parallel lint:cached lint:yaml lint:markdown format:check",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "setup": "echo 'Use: npx @stillrivercode/agentic-workflow-template <project-name>' && echo 'Example: npx @stillrivercode/agentic-workflow-template my-ai-project'",
-    "create-project": "node cli/index.js",
-    "test:cli": "./dev-scripts/test-cli.sh",
-    "test:cli-integration": "jest cli/tests/validators.test.js",
-    "test:all": "npm run test:cli-integration && npm run test:cli"
+    "build": "cd app && npm run build",
+    "test:all": "npm run test && npm run test:config",
+    "dev": "npm run start",
+    "idk:install": "npx @stillrivercode/information-dense-keywords",
+    "idk:update": "npm update @stillrivercode/information-dense-keywords"
   },
-  "main": "cli/index.js",
-  "preferGlobal": true
+  "main": "app/src/main.tsx"
 }
