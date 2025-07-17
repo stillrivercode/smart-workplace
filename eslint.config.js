@@ -3,9 +3,47 @@ const prettier = require('eslint-config-prettier');
 const security = require('eslint-plugin-security');
 
 module.exports = [
+  // CommonJS files (must come first to override base config)
+  {
+    files: ['**/*.cjs', '.eslintrc*.js', 'eslint.config.js'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'commonjs',
+      globals: {
+        require: 'readonly',
+        module: 'readonly',
+        exports: 'readonly',
+        // Node.js globals
+        global: 'readonly',
+        process: 'readonly',
+        Buffer: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        // Console
+        console: 'readonly',
+        // Browser globals (for CLI tools that might run in browser-like environments)
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly',
+      },
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      'no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+      'no-console': 'off',
+    },
+  },
+
   // Base configuration for all files
   {
-    files: ['**/*.js', '**/*.mjs', '**/*.cjs'],
+    files: ['**/*.js', '**/*.mjs'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
@@ -35,19 +73,6 @@ module.exports = [
         },
       ],
       'no-console': 'off',
-    },
-  },
-
-  // CommonJS files
-  {
-    files: ['**/*.cjs', '.eslintrc*.js'],
-    languageOptions: {
-      sourceType: 'commonjs',
-      globals: {
-        require: 'readonly',
-        module: 'readonly',
-        exports: 'readonly',
-      },
     },
   },
 
@@ -116,29 +141,6 @@ module.exports = [
     },
   },
 
-  // Shared commands files
-  {
-    files: ['shared-commands/**/*.js'],
-    languageOptions: {
-      globals: {
-        process: 'readonly',
-        require: 'readonly',
-        module: 'readonly',
-        exports: 'readonly',
-        __dirname: 'readonly',
-        __filename: 'readonly',
-      },
-    },
-    rules: {
-      'no-unused-vars': [
-        'error',
-        {
-          argsIgnorePattern: '^_',
-          caughtErrorsIgnorePattern: '^_',
-        },
-      ],
-    },
-  },
 
   // Prettier integration (should be last)
   prettier,
@@ -148,7 +150,9 @@ module.exports = [
     ignores: [
       'node_modules/',
       'dist/',
+      '**/dist/',
       'build/',
+      '**/build/',
       'coverage/',
       '.git/',
       '*.min.js',
@@ -158,6 +162,7 @@ module.exports = [
       'temp/',
       '**/fixtures/',
       'jest.config.js',
+      'app/dist/', // React app build output
     ],
   },
 ];
