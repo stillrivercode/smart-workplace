@@ -1,47 +1,29 @@
 {
-  "name": "@stillrivercode/agentic-workflow-template",
-  "version": "1.11.3",
-  "description": "NPM package to create AI-powered GitHub workflow automation projects",
+  "name": "smart-workplace",
+  "version": "1.0.0",
+  "description": "Smart workplace application with AI-powered development workflows",
   "keywords": [
-    "github-actions",
+    "workplace",
+    "smart-workplace",
     "ai",
     "automation",
-    "workflow",
-    "template",
-    "cli"
+    "productivity",
+    "workflow"
   ],
-  "author": "Still River Code <noreply@stillrivercode.com>",
+  "author": "Stillriver Code <admin@stillrivercode.info>",
   "license": "MIT",
-  "homepage": "https://github.com/stillrivercode/agentic-workflow-template#readme",
+  "homepage": "https://github.com/stillrivercode/smart-workplace#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stillrivercode/agentic-workflow-template.git"
+    "url": "git+https://github.com/stillrivercode/smart-workplace.git"
   },
   "bugs": {
-    "url": "https://github.com/stillrivercode/agentic-workflow-template/issues"
+    "url": "https://github.com/stillrivercode/smart-workplace/issues"
   },
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
   },
-  "files": [
-    "scripts/",
-    "cli/",
-    ".github/workflows/",
-    "docs/",
-    "README.md",
-    "CLAUDE.md",
-    "GEMINI.md",
-    "LICENSE",
-    "package.json",
-    ".pre-commit-config.yaml",
-    "eslint.config.js",
-    ".yamllint.yaml",
-    ".secrets.baseline",
-    ".gitignore",
-    ".gitattributes",
-    ".env.example"
-  ],
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^11.0.0",
@@ -74,12 +56,9 @@
     "lint:all": "npm-run-all --parallel lint:cached lint:yaml lint:markdown format:check",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "setup": "echo 'Use: npx @stillrivercode/agentic-workflow-template <project-name>' && echo 'Example: npx @stillrivercode/agentic-workflow-template my-ai-project'",
-    "create-project": "node cli/index.js",
-    "test:cli": "./dev-scripts/test-cli.sh",
-    "test:cli-integration": "jest cli/tests/validators.test.js",
-    "test:all": "npm run test:cli-integration && npm run test:cli"
+    "build": "cd app && npm run build",
+    "test:all": "npm run test && npm run test:config",
+    "dev": "npm run start"
   },
-  "main": "cli/index.js",
-  "preferGlobal": true
+  "main": "app/src/main.tsx"
 }
